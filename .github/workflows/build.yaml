@@ -7,7 +7,7 @@ on:
 
 jobs:
   build_app:
-    runs-on: "k8s-runner"
+    runs-on: "testing"
     steps:
       - name: "Get repository..."
         uses: "actions/checkout@v3"
