@@ -10,6 +10,9 @@ jobs:
     runs-on: "testing"
     container: "golang:1.19-bullseye"
     steps:
+      - name: "Get repository..."
+        uses: "actions/checkout@v3"
+
       - name: "Get dependencies..."
         run: "go mod tidy"
 
