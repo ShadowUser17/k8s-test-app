@@ -18,3 +18,9 @@ jobs:
 
       - name: "Build application..."
         run: "go build -ldflags=\"-s -w\" -o ./output/app ./cmd/main.go"
+
+      - name: "Upload artifact..."
+        uses: "actions/upload-artifact@v3"
+        with:
+          name: "app-bin"
+          path: "./output/app"
