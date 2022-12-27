@@ -8,19 +8,19 @@ on:
 jobs:
   build_app:
     runs-on: "testing"
-    container: "golang:1.19-bullseye"
     steps:
-      - name: "Get repository..."
+      - name: "Check out the repo"
         uses: "actions/checkout@v3"
 
-      - name: "Get dependencies..."
-        run: "go mod tidy"
-
-      - name: "Build application..."
-        run: "go build -ldflags=\"-s -w\" -o ./output/app ./cmd/main.go"
-
-      - name: "Upload artifact..."
-        uses: "actions/upload-artifact@v3"
+      - name: "Log in to Docker Hub"
+        uses: "docker/login-action@v2"
         with:
-          name: "app-bin"
-          path: "./output/app"
+          username: "${{ secrets.DOCKERHUB_LOGIN }}"
+          password: "${{ secrets.DOCKERHUB_TOKEN }}"
+
+      - name: "Build and push Docker image"
+        uses: "docker/build-push-action@v3"
+        with:
+          context: "."
+          push: true
+          tags: "shadowuser17/testing:latest"
