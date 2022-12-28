@@ -1,0 +1,7 @@
+resources:
+  - "namespace.yml"
+  - "access.yml"
+  - "service.yml"
+  - "deploy.yml"
+
+namespace: "k8s-test-app"

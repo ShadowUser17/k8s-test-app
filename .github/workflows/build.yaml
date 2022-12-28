@@ -12,7 +12,7 @@ env:
   IMAGE_TAG: "${{ github.sha }}"
 
 jobs:
-  build_app:
+  build_image:
     runs-on: "testing"
     steps:
       - name: "Check out the repo"
