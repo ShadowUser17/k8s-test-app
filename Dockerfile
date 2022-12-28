@@ -2,11 +2,11 @@ FROM golang:1.19-bullseye AS build
 
 WORKDIR /root
 
-COPY ./cmd ./
+COPY ./cmd/main.go ./
 COPY ./go.mod ./
 
 RUN go mod tidy
-RUN go build -ldflags="-s -w" -o ./app ./cmd/main.go
+RUN go build -ldflags="-s -w" -o ./app ./main.go
 
 
 FROM alpine:3.17.0
