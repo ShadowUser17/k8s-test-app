@@ -52,10 +52,15 @@ func main() {
 					var items = make([]string, 0)
 
 					for index := range pods.Items {
-						items = append(items, "pod/"+pods.Items[index].Name)
+						items = append(items, pods.Items[index].Namespace+"/"+pods.Items[index].Name)
 					}
 
-					ctx.JSON(http.StatusOK, gin.H{"Pods": items})
+					ctx.JSON(http.StatusOK, gin.H{
+						"Host":     config.Host,
+						"APIPath":  config.APIPath,
+						"Username": config.Username,
+						"Pods":     items,
+					})
 				}
 			})
 
