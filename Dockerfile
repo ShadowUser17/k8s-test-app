@@ -12,7 +12,7 @@ RUN go build -ldflags="-s -w" -o ./app ./main.go
 FROM alpine:3.17.0
 
 WORKDIR /root
-COPY --from=build ./app ./
+COPY --from=build /root/app ./
 
 EXPOSE 8080/tcp
 
