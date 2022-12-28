@@ -64,6 +64,7 @@ spec:
       labels:
         app.kubernetes.io/name: "k8s-test-app"
     spec:
+      serviceAccountName: "k8s-test-app"
       containers:
         - name: "testing"
           image: "shadowuser17/testing:latest"
