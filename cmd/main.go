@@ -46,7 +46,7 @@ func main() {
 
 			router.GET("/", func(ctx *gin.Context) {
 				if pods, err := clientSet.CoreV1().Pods("").List(context.TODO(), meta.ListOptions{}); err != nil {
-					ctx.JSON(http.StatusInternalServerError, gin.H{"Error": err.Error()})
+					ctx.JSON(http.StatusOK, gin.H{"Error": err.Error()})
 
 				} else {
 					var items = make([]string, 0)
