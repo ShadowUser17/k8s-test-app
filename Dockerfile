@@ -1,4 +1,4 @@
-FROM golang:1.19-bullseye AS build
+FROM golang:1.19-alpine AS build
 
 WORKDIR /root
 
@@ -16,5 +16,5 @@ COPY --from=build /root/app ./
 
 EXPOSE 8080/tcp
 
-ENTRYPOINT ["./app"]
+ENTRYPOINT ["/root/app"]
 CMD ["-listen", "0.0.0.0:8080"]
