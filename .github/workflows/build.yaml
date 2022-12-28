@@ -4,8 +4,11 @@ permissions: {}
 
 on:
   push:
-    paths: ["cmd/*.go"]
-    branches: ["master"]
+    paths:
+      - ".github/workflows/*.yaml"
+      - "cmd/*.go"
+    branches:
+      - "master"
 
 env:
   IMAGE_NAME: "shadowuser17/testing"
@@ -22,7 +25,7 @@ jobs:
         run: "docker login -u \"${{ secrets.DOCKERHUB_LOGIN }}\" -p \"${{ secrets.DOCKERHUB_TOKEN }}\""
 
       - name: "Build Docker image"
-        run: "docker build -t \"${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}\" ."
+        run: "docker build -t \"${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}\" -t \"${{ env.IMAGE_NAME }}:latest\"" ."
 
       - name: "Push Docker image"
-        run: "docker push \"${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}\""
+        run: "docker push --all-tags \"${{ env.IMAGE_NAME }}\""
