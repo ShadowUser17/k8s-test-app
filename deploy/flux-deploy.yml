@@ -1,0 +1,24 @@
+apiVersion: "source.toolkit.fluxcd.io/v1beta2"
+kind: "GitRepository"
+metadata:
+  namespace: "flux-system"
+  name: "k8s-test-app"
+spec:
+  interval: "2m"
+  url: "https://github.com/ShadowUser17/k8s-test-app.git"
+  ref:
+    branch: "master"
+
+---
+apiVersion: "kustomize.toolkit.fluxcd.io/v1beta2"
+kind: "Kustomization"
+metadata:
+  namespace: "flux-system"
+  name: "k8s-test-app"
+spec:
+  path: "./ci-cd"
+  prune: true
+  interval: "2m"
+  sourceRef:
+    kind: "GitRepository"
+    name: "k8s-test-app"
